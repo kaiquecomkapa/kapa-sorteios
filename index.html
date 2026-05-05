@@ -1606,7 +1606,31 @@ Boa sorte! 🍀
       }
     });
 
-    renderCards();
+    async function atualizarTikTok() {
+  try {
+    const res = await fetch('/api/tiktok');
+    const data = await res.json();
+
+    // Aqui você define o número no card do TikTok
+    const tiktokCard = document.querySelector('[data-platform="tiktok"] .followers');
+
+    if (tiktokCard) {
+      tiktokCard.innerText = data.seguidores;
+    }
+
+  } catch (e) {
+    console.log("Erro ao atualizar TikTok");
+  }
+}
+
+// roda quando abre o site
+atualizarTikTok();
+
+// roda a cada 30 segundos
+setInterval(atualizarTikTok, 30000);
+
+// mantém o resto do site funcionando
+renderCards();
   </script>
 
 <script>
