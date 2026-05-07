@@ -1606,31 +1606,26 @@ Boa sorte! 🍀
       }
     });
 
-    async function atualizarTikTok() {
+async function atualizarTikTok() {
   try {
     const res = await fetch('/api/tiktok');
     const data = await res.json();
 
-    // Aqui você define o número no card do TikTok
-    const tiktokCard = document.querySelector('[data-platform="tiktok"] .followers');
+    const tiktok = networks.find(n => n.name === 'TikTok');
 
-    if (tiktokCard) {
-      tiktokCard.innerText = data.followers;
+    if (tiktok && data.followers) {
+      tiktok.followers = data.followers;
     }
 
+    renderCards();
   } catch (e) {
     console.log("Erro ao atualizar TikTok");
+    renderCards();
   }
 }
 
-// roda quando abre o site
 atualizarTikTok();
-
-// roda a cada 30 segundos
 setInterval(atualizarTikTok, 30000);
-
-// mantém o resto do site funcionando
-renderCards();
   </script>
 
 <script>
