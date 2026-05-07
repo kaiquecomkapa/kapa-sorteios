@@ -1614,7 +1614,7 @@ async function atualizarTikTok() {
     const tiktok = networks.find(n => n.name === 'TikTok');
 
     if (tiktok && data.followers) {
-      tiktok.followers = data.followers;
+      tiktok.followers = data.followers - 1;
     }
 
     renderCards();
