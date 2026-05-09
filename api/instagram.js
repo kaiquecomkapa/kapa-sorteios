@@ -1,18 +1,15 @@
 export default async function handler(req, res) {
   try {
-    const response = await fetch("https://www.instagram.com/kaiquecomkapa/?__a=1&__d=dis");
+    const response = await fetch("https://i.instagram.com/api/v1/users/web_profile_info/?username=kaiquecomkapa", {
+      headers: {
+        "User-Agent": "Instagram 155.0.0.37.107"
+      }
+    });
 
-    const text = await response.text();
+    const data = await response.json();
 
-    const match = text.match(/"edge_followed_by":{"count":(\d+)}/);
-
-    if (!match) {
-      return res.status(500).json({
-        error: "Não foi possível encontrar seguidores"
-      });
-    }
-
-    const followers = parseInt(match[1]) - 1;
+    const followers =
+      data.data.user.edge_followed_by.count - 1;
 
     res.status(200).json({
       seguidores: followers
