@@ -1571,14 +1571,28 @@ Boa sorte! 🍀
       }
 
       try {
-        await fetch(url, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+const resposta = await fetch('/api/participar', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: payload.nome,
+    email: payload.email,
+    network: payload.rede,
+    username: payload.usuario
+  })
+});
+
+const resultado = await resposta.json();
+
+if (!resposta.ok) {
+  if (resultado.duplicate) {
+    throw new Error('DUPLICADO');
+  }
+
+  throw new Error('ERRO');
+}
 
         const tempoPassado = Date.now() - envioInicio;
         const tempoMinimo = 1800;
@@ -1586,8 +1600,13 @@ Boa sorte! 🍀
           await new Promise(resolve => setTimeout(resolve, tempoMinimo - tempoPassado));
         }
 
-        fecharPopupEnvio();
-        abrirPopupSucesso();
+fecharPopupEnvio();
+
+if (err.message === 'DUPLICADO') {
+  abrirPopupDuplicado();
+} else {
+  abrirPopupErro();
+}
         form.reset();
       } catch (err) {
         const tempoPassado = Date.now() - envioInicio;
