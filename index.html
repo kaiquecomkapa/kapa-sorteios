@@ -1424,7 +1424,7 @@ Boa sorte! 🍀
       {
         name: 'YouTube',
         handle: '@KaiqueComKapa',
-        followers: 900,
+        followers: 0,
         goal: 1000,
         url: 'https://www.youtube.com/@KaiqueComKapa',
         icon: '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAlCAYAAAAN8srVAAAFd0lEQVR4nNVZS2hUVxj+zrnnPuaRjDN5OXlMBzOJpdFQF0VdiEZXrlRKLYRSpAvbVaBQCi5aN6IgXbkQ7EpKF10ZCqW1lFKCuGgjLbSxSkugtdVUExLznJl779yvizt3JsaYqnMnaT74YTjc88//n/95zi9QBgEhAAIALAu8cKETo6PdmJjIYGGhC1NTCSjVAdtOYHHRhONYiEZbsbQkIUQcjiNg24CUJjTNgOdJGEYEngeUSv6faBogJWDbeQjhwfNseF4RhgHoOkEuIBollpYeQNfziMWKMIxZuO5dtLbOwbLuoK3tDvbuHRdDQ3+jUHhc9mABAEgKHjp0ktnsdaZS04zHSdMklSKFIIGNISF8GUyTjMXIVGqa2ex1Hjz4DkkZyB4oIwkIXruWZC73DU1zJcMSAXcFlQiUKIT3BOJT0ur7A/6r/29VNtMke3q+49WrKQKCgPQVIhVzuW/LHxYpRKnMeOOssrbFPApRIlAkQHZ3j5BUBKRvpYGBk9R1Vj7YXFSkUuS+fW+jEjcdHT+UXcj9Hwj4rNbyXbGj40eSUuHMmSzm5/vgm4vYbPCTgsDc3Is4dSorcePGDth2FAARZIrNBQHAg+NEMDbWL3HvXg8cBwC8DRasFhCOA0xPvyRRKOQqhS88eBBifQ+oVAIWFrISrtsVKuNYzEEsJsu+XYIQ9Y9LIfxQse0uiWKx5ZHF52fqm7mt7ScMDh5BZ+ev0HWtHJduTbyfFouLSbC9/WalWNWePsnOzlFoGkhGuH//e2xpeUApg+/qUxYC2dPp2xJSpkI9JSlB19WEEHkxMvIRzp17GTt3XkQiUQKgoZ7xJUQSTKcflrUMo8CRmcwoTDPoERUAQNPAoaFX2NPzFaPRYI8TWnsVyN7aOgc2NS3WSaFqB+9bBjBN8MiRV9nV9Uu51fIVC0uhRGIBbGiYD+mUVlUoAE+fliw3jyQjPHDgfba2Ti2Lr9opkSiCyaRbTwutBF97Tav8vnQpwx07PmY8PluT+wWyp1IEm5oeXayzQsvc0AQAGAY4OPgu4/HH7zvP7nJcfwsF8SQEePZsjn19nzISWQzPQo2NdU0Ky12N1UTRwN27P2BT02yoV/stW4r1z3J+MvCtEomAhw+/yfb236lUsLf2YvtIlkunZ+ukULUOKQWeOLGPudwII5FgT/h1qK1tDuzqmigvhtP6ZDKjJKuZ7Pz5bvb3X2ZjY9Ui/ntAeK4WyN7efr8+vZxS4ORkA/fs+ZDNzUGceKG411oKdXTcVohE5qsJ6Mmp9qlhGOTx46+jv/8MJidzcF0ACPo4be3Nzw1fdk17qKDr9/0lsjaWZTebmNiF4eHPkM8DgAshNCxzwboiGp1WMIy//IfU2vSpIJ9X8DtqgFSh8V0LgTF0/Y6EZY1DC/0Agxvr+kHTgHj8D4mtW3+DUr4QmxcSug4kk7ckBgZuwjQXAYh1uf+HDV9mAV1fwq5dP4OkYCbzPTf7y2kmc4OklEIIoqfnIgxDggz9PavuIEvQdYls9qIQwgumD5Lbt39ZLoA2hXA3wfTBJWATILu7vybpXyDpz1UEx8bi7O39nJa1ksFqcxq37KJPnhH5ncHKedHK9dUomA3993zIssje3i9461ZDoIffEQcjPdMEBwbewPj4W5iZ6UOh0AzXlXBdwPN82ghI6ZNSgFIeTHMKyeRNbNt2WYyMfIJisaJDpdVhue2pKDY83IIrVzKYmnoBMzPtcN2tmJ/fAimbkc/HUSgY8Lw4LCuFfF7AcSSUisNxAMepHoBSBpTyb6elkg3HKVYE1HWfXHcBuu4hEgEKhWlIOQ/LshGNLsHzJhGPP4RS/6Cx8S7S6Ts4evRPcezYZKBIRW4A/wKUrsKQ4JCpPwAAAABJRU5ErkJggg==" alt="YouTube">',      }
@@ -1668,6 +1668,26 @@ setInterval(atualizarInstagram, 30000);
 
 atualizarFacebook();
 setInterval(atualizarFacebook, 30000);
+
+async function atualizarYouTube() {
+  try {
+    const res = await fetch('/api/youtube');
+    const data = await res.json();
+
+    const youtube = networks.find(n => n.name === 'YouTube');
+
+    if (youtube && data.seguidores) {
+      youtube.followers = data.seguidores;
+    }
+
+    renderCards();
+  } catch (e) {
+    console.log("Erro ao atualizar YouTube");
+  }
+}
+
+atualizarYouTube();
+setInterval(atualizarYouTube, 30000);
   </script>
 
 <script>
