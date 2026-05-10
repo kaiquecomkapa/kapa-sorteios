@@ -1654,15 +1654,31 @@ async function atualizarInstagram() {
       instagram.followers = data.seguidores;
     }
 
-    renderCards();
-  } catch (e) {
-    console.log("Erro ao atualizar Instagram");
-    renderCards();
-  }
-}
+<div class="error-popup-backdrop" id="errorPopup" role="dialog" aria-modal="true" aria-label="Inscrição já realizada">
+  <div class="error-popup">
+    <button class="error-popup-close" type="button" id="errorPopupClose" aria-label="Fechar">×</button>
+    <div class="error-icon">!</div>
 
-async function atualizarFacebook() {
-  try {
+    <h3>Inscrição já realizada 😕</h3>
+
+    <p>
+      Parece que você já se inscreveu neste sorteio.<br><br>
+      <b>Não precisa se inscrever novamente.</b>
+    </p>
+
+    <div style="margin-top:18px; padding:14px; border-radius:20px; background:#ecfdf5;">
+      <p style="margin:0 0 10px; font-weight:800;">
+        Resultados do sorteio no canal do WhatsApp 👇
+      </p>
+
+      <a href="https://whatsapp.com/channel/0029Vb8MeHZ6mYPMEO3FMx0D" target="_blank" class="btn" style="width:100%; background:#25D366 !important; color:#fff !important;">
+        🟢 Entrar no canal do WhatsApp
+      </a>
+    </div>
+
+    <button class="btn" type="button" id="errorPopupBtn">Fechar</button>
+  </div>
+</div>
     const res = await fetch('/api/facebook');
     const data = await res.json();
 
