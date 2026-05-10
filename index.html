@@ -1668,9 +1668,9 @@ async function atualizarFacebook() {
 
     const facebook = networks.find(n => n.name === 'Facebook');
 
-    if (facebook && data.seguidores) {
-      facebook.followers = data.seguidores;
-    }
+if (facebook && data.seguidores !== undefined) {
+  facebook.followers = data.seguidores;
+}
 
     renderCards();
   } catch (e) {
