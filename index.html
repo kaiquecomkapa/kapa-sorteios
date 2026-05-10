@@ -1624,7 +1624,7 @@ async function atualizarTikTok() {
   }
 }
 
-    async function atualizarInstagram() {
+async function atualizarInstagram() {
   try {
     const res = await fetch('/api/instagram');
     const data = await res.json();
@@ -1634,6 +1634,13 @@ async function atualizarTikTok() {
     if (instagram && data.seguidores) {
       instagram.followers = data.seguidores;
     }
+
+    renderCards();
+  } catch (e) {
+    console.log("Erro ao atualizar Instagram");
+    renderCards();
+  }
+}
 
 async function atualizarFacebook() {
   try {
@@ -1649,13 +1656,6 @@ async function atualizarFacebook() {
     renderCards();
   } catch (e) {
     console.log("Erro ao atualizar Facebook");
-    renderCards();
-  }
-}
-    
-    renderCards();
-  } catch (e) {
-    console.log("Erro ao atualizar Instagram");
     renderCards();
   }
 }
