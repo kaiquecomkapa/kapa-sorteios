@@ -1818,8 +1818,12 @@ document.addEventListener("DOMContentLoaded", function(){
     const errorPopup = document.getElementById('errorPopup');
 
     if(errorCloseX) errorCloseX.addEventListener('click', fecharPopupErro);
-    if(errorCloseBtn) errorCloseBtn.addEventListener('click', fecharPopupErro);
-    if(errorPopup){
+if(errorCloseBtn) errorCloseBtn.addEventListener('click', function(){
+  fecharPopupErro();
+  if(dialog){
+    dialog.showModal();
+  }
+});    if(errorPopup){
       errorPopup.addEventListener('click', function(e){
         if(e.target === errorPopup) fecharPopupErro();
       });
