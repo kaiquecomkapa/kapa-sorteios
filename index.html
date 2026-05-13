@@ -1530,10 +1530,14 @@ Boa sorte! 🍀
         if(popup) popup.style.display = 'none';
       }
 
-      function abrirPopupErro(){
-        const popup = document.getElementById('errorPopup');
-        if(popup) popup.style.display = 'flex';
-      }
+function abrirPopupErro(){
+  if (dialog && dialog.open) {
+    dialog.close();
+  }
+
+  const popup = document.getElementById('errorPopup');
+  if(popup) popup.style.display = 'flex';
+}
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Enviando...';
