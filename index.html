@@ -1605,11 +1605,8 @@ if (!resposta.ok || resultado.ok !== true) {
 
 fecharPopupEnvio();
 
-if (err.message === 'DUPLICADO') {
-  abrirPopupDuplicado();
-} else {
-  abrirPopupErro();
-}
+abrirPopupSucesso();
+        
         form.reset();
       } catch (err) {
         const tempoPassado = Date.now() - envioInicio;
