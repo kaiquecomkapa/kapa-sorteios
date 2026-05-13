@@ -1590,14 +1590,13 @@ const resposta = await fetch('/api/participar', {
 
 const resultado = await resposta.json();
 
-if (!resposta.ok) {
+if (!resposta.ok || resultado.ok !== true) {
   if (resultado.duplicate) {
     throw new Error('DUPLICADO');
   }
 
   throw new Error('ERRO');
 }
-
         const tempoPassado = Date.now() - envioInicio;
         const tempoMinimo = 1800;
         if(tempoPassado < tempoMinimo){
