@@ -1821,10 +1821,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
     <h3>Inscrição já realizada 🙂</h3>
 
-    <p>
-      A tua inscrição já foi realizada <b>nesta rede social</b>.<br><br>
-      Obrigado e boa sorte! 🍀
-    </p>
+<p>
+  A tua inscrição já foi realizada<br>
+  <b>nesta rede social ⚠️</b>
+</p>
 
     <a class="btn" href="https://whatsapp.com/channel/0029Vb8MeHZ6mYPMEO3FMx" target="_blank" rel="noopener">
       Entrar no canal do WhatsApp
@@ -1931,12 +1931,15 @@ function fecharPopupDuplicado(){
 }
 
   document.addEventListener('DOMContentLoaded', function(){
-    const errorCloseX = document.getElementById('errorPopupClose');
-    const errorCloseBtn = document.getElementById('errorPopupBtn');
-    const errorPopup = document.getElementById('errorPopup');
+const duplicateCloseX = document.getElementById('duplicatePopupClose');
+const duplicateOtherBtn = document.getElementById('duplicateOtherNetworkBtn');
+const duplicatePopup = document.getElementById('duplicatePopup');
 
-    if(errorCloseX) errorCloseX.addEventListener('click', fecharPopupErro);
-if(errorCloseBtn) errorCloseBtn.addEventListener('click', function(){
+if(duplicateOtherBtn) {
+  duplicateOtherBtn.addEventListener('click', () => {
+    fecharPopupDuplicado();
+  });
+}if(errorCloseBtn) errorCloseBtn.addEventListener('click', function(){
   fecharPopupErro();
   if(dialog){
     dialog.showModal();
