@@ -1215,6 +1215,76 @@ button:hover, .btn:hover, .button:hover, .btn-primary:hover, .cta:hover {
   background:var(--btn);
   color:#000;
 }
+  .duplicate-popup-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,55,.55);
+  backdrop-filter:blur(6px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+  padding:20px;
+}
+
+.duplicate-popup{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border-radius:28px;
+  padding:34px 26px 26px;
+  position:relative;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
+  animation:popupFade .25s ease;
+}
+
+.duplicate-popup-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:999px;
+  background:#bfe3ff;
+  color:#10233f;
+  font-size:24px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.duplicate-icon{
+  width:82px;
+  height:82px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  background:linear-gradient(180deg,#ffd85b,#ffbf00);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:52px;
+  font-weight:800;
+}
+
+.duplicate-popup h3{
+  font-size:38px;
+  margin:0 0 14px;
+  color:#18243c;
+}
+
+.duplicate-popup p{
+  font-size:18px;
+  line-height:1.6;
+  color:#445;
+  margin-bottom:24px;
+}
+
+.duplicate-popup .btn{
+  width:100%;
+  margin-top:12px;
+}
 </style>
 
 </head>
@@ -1591,9 +1661,12 @@ const resposta = await fetch('/api/participar', {
 const resultado = await resposta.json();
 
 if (!resposta.ok || resultado.ok !== true) {
-  if (resultado.duplicate) {
-    throw new Error('DUPLICADO');
-  }
+if (
+  resultado.duplicate ||
+  resultado.status === 'duplicado'
+) {
+  throw new Error('DUPLICADO');
+}
 
   throw new Error('ERRO');
 }
@@ -1615,8 +1688,13 @@ abrirPopupSucesso();
           await new Promise(resolve => setTimeout(resolve, tempoMinimo - tempoPassado));
         }
 
-        fecharPopupEnvio();
-        abrirPopupErro();
+   fecharPopupEnvio();
+
+if (err.message === 'DUPLICADO') {
+  abrirPopupDuplicado();
+} else {
+  abrirPopupErro();
+}
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
@@ -1824,12 +1902,33 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 <script>
-  function fecharPopupErro(){
-    const popup = document.getElementById('errorPopup');
-    if(popup){
-      popup.style.display = 'none';
-    }
+function fecharPopupErro(){
+  const popup = document.getElementById('errorPopup');
+
+  if(popup){
+    popup.style.display = 'none';
   }
+}
+
+function abrirPopupDuplicado(){
+  if (dialog && dialog.open) {
+    dialog.close();
+  }
+
+  const popup = document.getElementById('duplicatePopup');
+
+  if(popup){
+    popup.style.display = 'flex';
+  }
+}
+
+function fecharPopupDuplicado(){
+  const popup = document.getElementById('duplicatePopup');
+
+  if(popup){
+    popup.style.display = 'none';
+  }
+}
 
   document.addEventListener('DOMContentLoaded', function(){
     const errorCloseX = document.getElementById('errorPopupClose');
