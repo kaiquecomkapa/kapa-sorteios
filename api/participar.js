@@ -28,16 +28,17 @@ export default async function handler(req, res) {
       });
     }
 
-const formData = new URLSearchParams();
-formData.append("nome", name);
-formData.append("email", email);
-formData.append("rede", network);
-formData.append("usuario", username);
-formData.append("acao", "participar");
-
 const response = await fetch(scriptUrl, {
   method: "POST",
-  body: formData
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    nome: name,
+    email: email,
+    rede: network,
+    usuario: username
+  })
 });
 
     const text = await response.text();
