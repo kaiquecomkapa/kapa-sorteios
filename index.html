@@ -1940,6 +1940,9 @@ if(duplicateOtherBtn) {
   duplicateOtherBtn.addEventListener('click', () => {
     fecharPopupDuplicado();
   });
+  if(duplicateCloseX){
+  duplicateCloseX.addEventListener('click', fecharPopupDuplicado);
+}
 }if(errorCloseBtn) errorCloseBtn.addEventListener('click', function(){
   fecharPopupErro();
   if(dialog){
