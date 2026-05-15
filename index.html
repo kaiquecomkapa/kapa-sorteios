@@ -1942,32 +1942,49 @@ function fecharPopupDuplicado(){
     popup.style.display = 'none';
   }
 }
+document.addEventListener('DOMContentLoaded', function(){
+  const duplicateCloseX = document.getElementById('duplicatePopupClose');
+  const duplicateOtherBtn = document.getElementById('duplicateOtherNetworkBtn');
+  const duplicatePopup = document.getElementById('duplicatePopup');
 
-  document.addEventListener('DOMContentLoaded', function(){
-const duplicateCloseX = document.getElementById('duplicatePopupClose');
-const duplicateOtherBtn = document.getElementById('duplicateOtherNetworkBtn');
-const errorCloseX = document.getElementById('errorPopupClose');
-    const errorPopup =
-document.getElementById('errorPopup');
+  const errorCloseX = document.getElementById('errorPopupClose');
+  const errorCloseBtn = document.getElementById('errorPopupBtn');
+  const errorPopup = document.getElementById('errorPopup');
 
-if(duplicateOtherBtn) {
-  duplicateOtherBtn.addEventListener('click', () => {
-    fecharPopupDuplicado();
-  });
-if(errorCloseX){
-  errorCloseX.addEventListener('click', fecharPopupErro);
-}
-}if(errorCloseBtn) errorCloseBtn.addEventListener('click', function(){
-  fecharPopupErro();
-  if(dialog){
-    dialog.showModal();
+  if(duplicateOtherBtn){
+    duplicateOtherBtn.addEventListener('click', function(){
+      fecharPopupDuplicado();
+    });
   }
-});    if(errorPopup){
-      errorPopup.addEventListener('click', function(e){
-        if(e.target === errorPopup) fecharPopupErro();
-      });
-    }
-  });
+
+  if(duplicateCloseX){
+    duplicateCloseX.addEventListener('click', fecharPopupDuplicado);
+  }
+
+  if(errorCloseX){
+    errorCloseX.addEventListener('click', fecharPopupErro);
+  }
+
+  if(errorCloseBtn){
+    errorCloseBtn.addEventListener('click', function(){
+      fecharPopupErro();
+
+      const participarDialog = document.getElementById('participarDialog');
+
+      if(participarDialog){
+        participarDialog.showModal();
+      }
+    });
+  }
+
+  if(errorPopup){
+    errorPopup.addEventListener('click', function(e){
+      if(e.target === errorPopup){
+        fecharPopupErro();
+      }
+    });
+  }
+});
 </script>
 
 </body>
