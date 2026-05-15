@@ -1946,14 +1946,14 @@ function fecharPopupDuplicado(){
   document.addEventListener('DOMContentLoaded', function(){
 const duplicateCloseX = document.getElementById('duplicatePopupClose');
 const duplicateOtherBtn = document.getElementById('duplicateOtherNetworkBtn');
-const duplicatePopup = document.getElementById('duplicatePopup');
+const errorCloseX = document.getElementById('errorPopupClose');
 
 if(duplicateOtherBtn) {
   duplicateOtherBtn.addEventListener('click', () => {
     fecharPopupDuplicado();
   });
-  if(duplicateCloseX){
-  duplicateCloseX.addEventListener('click', fecharPopupDuplicado);
+if(errorCloseX){
+  errorCloseX.addEventListener('click', fecharPopupErro);
 }
 }if(errorCloseBtn) errorCloseBtn.addEventListener('click', function(){
   fecharPopupErro();
