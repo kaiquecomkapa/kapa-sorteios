@@ -1605,8 +1605,26 @@ function abrirPopupErro(){
     dialog.close();
   }
 
-  const popup = document.getElementById('errorPopup');
-  if(popup) popup.style.display = 'flex';
+const popup = document.getElementById('errorPopup');
+const errorBtn = document.getElementById('errorPopupBtn');
+
+if(popup){
+  popup.style.display = 'flex';
+}
+
+if(errorBtn){
+  errorBtn.disabled = true;
+  errorBtn.style.opacity = '0.5';
+  errorBtn.style.cursor = 'not-allowed';
+  errorBtn.textContent = 'Aguarda 3 segundos...';
+
+  setTimeout(() => {
+    errorBtn.disabled = false;
+    errorBtn.style.opacity = '';
+    errorBtn.style.cursor = '';
+    errorBtn.textContent = 'Tentar novamente';
+  }, 3000);
+}
 }
 
       submitBtn.disabled = true;
@@ -1970,20 +1988,12 @@ if(errorCloseBtn){
 
     fecharPopupErro();
 
-    errorCloseBtn.disabled = true;
+    const participarDialog =
+    document.getElementById('participarDialog');
 
-    setTimeout(() => {
-
-      const participarDialog =
-      document.getElementById('participarDialog');
-
-      if(participarDialog){
-        participarDialog.showModal();
-      }
-
-      errorCloseBtn.disabled = false;
-
-    }, 3000);
+    if(participarDialog){
+      participarDialog.showModal();
+    }
 
   });
 }
