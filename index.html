@@ -1965,17 +1965,29 @@ document.addEventListener('DOMContentLoaded', function(){
     errorCloseX.addEventListener('click', fecharPopupErro);
   }
 
-  if(errorCloseBtn){
-    errorCloseBtn.addEventListener('click', function(){
-      fecharPopupErro();
+if(errorCloseBtn){
+  errorCloseBtn.addEventListener('click', function(){
 
-      const participarDialog = document.getElementById('participarDialog');
+    fecharPopupErro();
+
+    errorCloseBtn.disabled = true;
+
+    setTimeout(() => {
+
+      const participarDialog =
+      document.getElementById('participarDialog');
 
       if(participarDialog){
         participarDialog.showModal();
       }
-    });
-  }
+
+      errorCloseBtn.disabled = false;
+
+    }, 3000);
+
+  });
+}
+}
 
   if(errorPopup){
     errorPopup.addEventListener('click', function(e){
