@@ -1613,17 +1613,35 @@ if(popup){
 }
 
 if(errorBtn){
-  errorBtn.disabled = true;
-  errorBtn.style.opacity = '0.5';
-  errorBtn.style.cursor = 'not-allowed';
-  errorBtn.textContent = 'Aguarda 3 segundos...';
+errorBtn.disabled = true;
+errorBtn.style.opacity = '0.5';
+errorBtn.style.cursor = 'not-allowed';
 
-  setTimeout(() => {
+let segundos = 3;
+errorBtn.textContent =
+`Espere ${segundos} segundo${segundos > 1 ? 's' : ''}...`;
+
+const contador = setInterval(() => {
+
+  segundos--;
+
+  if(segundos > 0){
+
+   errorBtn.textContent =
+`Espere ${segundos} segundo${segundos > 1 ? 's' : ''}...`;
+  } else {
+
+    clearInterval(contador);
+
     errorBtn.disabled = false;
     errorBtn.style.opacity = '';
     errorBtn.style.cursor = '';
-    errorBtn.textContent = 'Tentar novamente';
-  }, 3000);
+    errorBtn.textContent =
+    'Tentar novamente';
+
+  }
+
+}, 1000);
 }
 }
 
