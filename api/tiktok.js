@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   try {
-    const response = await fetch("https://www.tiktok.com/@kaique.com.kapa");
+    const response = await fetch("https://www.tiktok.com/@kaiquecomkapa");
     const html = await response.text();
 
     const match = html.match(/"followerCount":(\d+)/);
