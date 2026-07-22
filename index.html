@@ -1541,10 +1541,22 @@ Boa sorte! 🍀
                 <div class="mini-label">${n.name === 'YouTube' ? 'Inscritos atuais' : 'Seguidores atuais'}</div>
                 <div class="mini-value">${formatNumber(n.followers)}</div>
               </div>
-              <div class="mini">
-                <div class="mini-label">Meta</div>
-                <div class="mini-value">${formatNumber(n.goal)}</div>
-              </div>
+${
+  n.name === 'YouTube' && n.followers >= n.goal
+    ? `
+      <div class="mini">
+        <div class="mini-value" style="font-size:22px; text-align:center;">
+          Objetivos Concluídos
+        </div>
+      </div>
+    `
+    : `
+      <div class="mini">
+        <div class="mini-label">Meta</div>
+        <div class="mini-value">${formatNumber(n.goal)}</div>
+      </div>
+    `
+}
             </div>
 
             <div class="bar"><span style="width:${progress}%"></span></div>
