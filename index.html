@@ -1553,10 +1553,38 @@ Boa sorte! 🍀
               <span>Faltam ${formatNumber(Math.max(0, n.goal - n.followers))}</span>
             </div>
 
-            <div class="card-actions">
-              <a class="btn btn-primary" href="${n.url}" target="_blank" rel="noopener noreferrer">${n.name === 'YouTube' ? 'Inscrever-se' : 'Seguir'}</a>
-              <button class="btn btn-secondary participar-btn" data-rede="${n.name}">Participar</button>
-            </div>
+<div class="card-actions">
+  ${
+    n.name === 'YouTube' && n.followers >= n.goal
+      ? `
+        <a
+          class="btn btn-primary"
+          href="https://kapa-comprovantes.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          🏆 Ver comprovantes
+        </a>
+      `
+      : `
+        <a
+          class="btn btn-primary"
+          href="${n.url}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ${n.name === 'YouTube' ? 'Inscrever-se' : 'Seguir'}
+        </a>
+
+        <button
+          class="btn btn-secondary participar-btn"
+          data-rede="${n.name}"
+        >
+          Participar
+        </button>
+      `
+  }
+</div>
           </article>
         `;
       }).join('');
