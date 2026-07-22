@@ -1531,9 +1531,17 @@ Boa sorte! 🍀
               <div class="network-status-top">
                 ${n.followers >= n.goal ? `<div class="pill meta-reached">Meta alcançada 🎉</div>` : `<div class="pill meta-active">Meta ativa</div>`}
               </div>
-              <div style="display:flex;align-items:center;justify-content:center;gap:16px;width:100%;">
-                <div class="prize"><div class="premio-btn">💰 Prêmio: <strong>${n.prize}</strong>&nbsp; 💸</div></div>
-              </div>
+<div style="display:flex;align-items:center;justify-content:center;gap:16px;width:100%;">
+  <div class="prize">
+    <div class="premio-btn">
+      ${
+        n.name === 'YouTube' && n.followers >= n.goal
+          ? '💰 Prêmios Entregues ✅'
+          : `💰 Prêmio: <strong>${n.prize}</strong>&nbsp; 💸`
+      }
+    </div>
+  </div>
+</div>
             </div>
 
             <div class="stat-row">
